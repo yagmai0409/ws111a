@@ -68,9 +68,9 @@ export function list(posts) {
   for (let post of posts) {
     list.push(`
     <li>
-      <h2>${ post.title }</h2>
+    <h2>${ post.title } (${ post.time })</h2>
       <p><a href="/post/${post.id}">查看</a></p>
-     
+      <p><a herf="/del/${post.id}">刪除</a></p>
     </li>
     `)
   }
@@ -100,9 +100,9 @@ export function newPost() {
 
 export function show(post) {
   return layout(post.title, `
-   
-    <h1>${post.title}</h1>
-    <pre>${post.body}</pre>
-    
-  `)
+  <p><a href="/">上一頁</a></p>
+  <h1>${post.title}</h1>
+  <pre>${post.body}</pre>
+  <p><a href="/del/${post.id}">刪除資料</a></p>
+`)
 }
