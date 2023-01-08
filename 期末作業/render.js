@@ -142,6 +142,6 @@ export function show(post) {
   return layout(post.title, `
     <h1>${post.title} -- by ${post.username}</h1>
     <p>${post.body}</p>
-    <p><a href="/del/${post.id}">刪除資料</a></p>
+    <p><a href="/del/${post.id}">刪除貼文</a></p>
   `)
 }
