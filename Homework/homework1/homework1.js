@@ -22,10 +22,10 @@ app.use((ctx) => {
        <form action="" method="post">
        <h1>Login</h1>
        <p>
-         <input type="text" name="user" value="" placeholder="User Name"/>
+         <input type="text" name="user" value="" placeholder="使用者名稱"/>
        </p>
        <p>  
-         <input type="password" name="password" value="" placeholder="Password"/>
+         <input type="password" name="password" value="" placeholder="密碼"/>
        </p>
          <button onclick="document.location='http://127.0.0.1:8000'">提交</button>
          </form>
