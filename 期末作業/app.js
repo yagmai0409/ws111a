@@ -19,7 +19,8 @@ router.get('/', list)
   .get('/post/:id', show)
   .post('/post', create)
   .get('/del/:id', del)
-  
+  .get('/post/:id/edit', edit)
+  .get('/post/:id/edit', doEdit)
 
   const app = new Application()
 app.use(Session.initMiddleware())
@@ -141,6 +142,22 @@ async function del(ctx) {
   
   ctx.response.body = result;
   ctx.response.redirect("/");
+}
+
+async function edit(ctx) {
+  const id = ctx.params.id;
+  const post = postQuery(`SELECT id, username, title, body FROM posts WHERE id=${id}`)[0];
+  const html = await render.editForm(post);
+  ctx.response.body = html;
+}
+
+async function doEdit(ctx) {
+  const body = ctx.request.body();
+  if (body.type === "form") {
+    const post = await parseFormBody(body);
+    sqlcmd("UPDATE posts SET title=?, body=? WHERE id=?", [post.title, post.body, post.id]);
+    ctx.response.redirect("/");
+  }
 }
 
 async function create(ctx) {
