@@ -103,6 +103,8 @@ export function fail() {
   `)
 }
 
+
+
 export function list(posts, user) {
   console.log('list: user=', user)
   let list = []
@@ -111,6 +113,7 @@ export function list(posts, user) {
     <li>
       <h2>${ post.title } -- by ${post.username}</h2>
       <p><a href="/post/${post.id}">查看貼文</a></p>
+      <p><a href="/post/${post.id}/edit">編輯貼文</a></p>
     </li>
     `)
   }
@@ -138,10 +141,27 @@ export function newPost() {
   `)
 }
 
+export function editForm(post) {
+  return layout('editForm',`
+    <form action="/post/edit" method="post">
+      <input type="hidden" name="id" value="${post.id}" />
+      標題
+      <input type="text" name="title" value="${post.title}"  />
+      <br />
+      <label>內容</label>
+      <textarea name="body" >${post.body}</textarea>
+      <br />
+      <p><input type="submit" value="編輯"></p>
+    </form>
+  `)
+}
+
 export function show(post) {
   return layout(post.title, `
+    <p><a href="/">上一頁</a></p>
     <h1>${post.title} -- by ${post.username}</h1>
     <p>${post.body}</p>
     <p><a href="/del/${post.id}">刪除貼文</a></p>
+    
   `)
 }
